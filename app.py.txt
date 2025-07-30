@@ -25,13 +25,13 @@ def load_data():
 
 df = load_data()
 
-# --- Streamlit UI ---
+# Streamlit UI 
 st.set_page_config(page_title="FluWatch – Real-Time Disease Tracker", layout="wide")
 
-st.title("🦠 FluWatch – Real-Time Disease Trend Tracker & Outbreak Predictor")
+st.title(" FluWatch – Real-Time Disease Trend Tracker & Outbreak Predictor")
 st.markdown("Track and predict common disease outbreaks using real-time trends and historical patterns.")
 
-# --- Sidebar filters ---
+# Sidebar filters 
 st.sidebar.header("Filter Criteria")
 region = st.sidebar.selectbox("Select Region", df["Region"].unique())
 disease = st.sidebar.selectbox("Select Disease", df["Disease"].unique())
@@ -39,13 +39,13 @@ disease = st.sidebar.selectbox("Select Disease", df["Disease"].unique())
 # Filtered data
 filtered_df = df[(df["Region"] == region) & (df["Disease"] == disease)]
 
-# --- Line Chart ---
-st.subheader(f"📈 {disease} Trends in {region}")
+# Line Chart 
+st.subheader(f" {disease} Trends in {region}")
 fig = px.line(filtered_df, x="Date", y="Cases", title=f"Historical {disease} Cases in {region}", labels={"Cases": "Number of Cases"})
 st.plotly_chart(fig, use_container_width=True)
 
 # --- Prediction ---
-st.subheader("🔮 Predict Future Outbreak Risk")
+st.subheader(" Predict Future Outbreak Risk")
 days_to_predict = st.slider("Days into the future", min_value=1, max_value=30, value=7)
 
 # Prepare data for modeling
@@ -69,9 +69,9 @@ fig2 = px.line(pred_df, x="Date", y="Predicted Cases", title=f"{disease} Case Pr
 st.plotly_chart(fig2, use_container_width=True)
 
 # Summary
-st.markdown("### 📌 Summary")
+st.markdown("###  Summary")
 st.markdown(f"Predicted number of {disease} cases in *{region}* after *{days_to_predict} days: *{int(predicted_cases[-1]):,}**")
 
 # Footer
 st.markdown("---")
-st.caption("Built with ❤️ using Streamlit | Sample data used for demonstration")
+st.caption("Built with  using Streamlit | Sample data used for demonstration")
